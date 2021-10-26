@@ -1,21 +1,21 @@
 def creeaza_vanzare(id, titlu, gen_carte, pret, tip_reducere):
     """
-    creaza un dictionar pentru o vanzare
+    creaza o lista de tupluri pentru o vanzare
     :param id: id-ul cartii vandute-string
     :param titlu: titlul cartii-string
     :param gen_carte: genul cartii-string
     :param pret:pretul cartii-float
     :param tip_reducere:tipul de reducere aplicat-string
-    :return: un dictonar care retine o vanzare
+    :return: o lista de tupluri care retine o vanzare
     """
-    return {
-        "id": id,
-        "titlu": titlu,
-        "gen_carte": gen_carte,
-        "pret": pret,
-        "tip_reducere": tip_reducere
 
-    }
+    return (
+        id,
+        titlu,
+        gen_carte,
+        pret,
+        tip_reducere
+    )
 
 
 def get_id(vanzare):
@@ -24,7 +24,7 @@ def get_id(vanzare):
     :param vanzare: un dictionar de tip vanzare
     :return: returneaza id-ul unei carti vandute
     """
-    return vanzare["id"]
+    return vanzare[0]
 
 
 def get_titlu(vanzare):
@@ -33,7 +33,7 @@ def get_titlu(vanzare):
     :param vanzare: un dictionar de tip vanzare
     :return: returneaza titlul unei carti vandute
     """
-    return vanzare["titlu"]
+    return vanzare[1]
 
 
 def get_gen_carte(vanzare):
@@ -42,7 +42,7 @@ def get_gen_carte(vanzare):
     :param vanzare: un dictionar de tip vanzare
     :return: returneaza genul de carte
     """
-    return vanzare["gen_carte"]
+    return vanzare[2]
 
 
 def get_pret(vanzare):
@@ -51,7 +51,7 @@ def get_pret(vanzare):
     :param vanzare: un dictionar de tip vanzare
     :return: returneaza pretul de vanzare al unei carti
     """
-    return vanzare["pret"]
+    return vanzare[3]
 
 
 def get_tip_reducere(vanzare):
@@ -60,7 +60,8 @@ def get_tip_reducere(vanzare):
     :param vanzare: un dictionar de tip vanzare
     :return: returneaza tipul de reducere al unei carti
     """
-    return vanzare["tip_reducere"]
+    return vanzare[4]
+
 
 def to_string(vanzare):
     return "id: {}, titlu: {}, gen_carte: {}, pret: {}, tip_reducere: {}".format(
@@ -70,4 +71,3 @@ def to_string(vanzare):
         get_pret(vanzare),
         get_tip_reducere(vanzare)
     )
-
