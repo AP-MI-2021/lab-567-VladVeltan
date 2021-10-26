@@ -9,3 +9,4 @@ def test_domeniu():
     assert get_pret(vanzare) == 100
     assert get_tip_reducere(vanzare) == "None"
     # facem test la domeniu pentru a verifica eventuale erori cauzate de typo-uri
+
