@@ -34,7 +34,6 @@ def modificare_gen_dupa_titlu(titlu, gen_modificat, lista):
     lista_noua = []
     for vanzare in lista:
         if get_titlu(vanzare) == titlu:
-            print("am ajuns la Harap Alb")
             vanzare_noua = creeaza_vanzare(
                 get_id(vanzare),
                 get_titlu(vanzare),
@@ -42,7 +41,6 @@ def modificare_gen_dupa_titlu(titlu, gen_modificat, lista):
                 get_pret(vanzare),
                 get_tip_reducere(vanzare)
             )
-            print(get_gen_carte(vanzare_noua))
             lista_noua.append(vanzare_noua)
         else:
             lista_noua.append(vanzare)
