@@ -26,7 +26,6 @@ def test_modificare_gen_dupa_titlu():
     gen_modificat = "poveste"
     lista = modificare_gen_dupa_titlu(titlu, gen_modificat, lista)
 
-    print(get_gen_carte((get_by_id("1",lista))))
 
     assert get_gen_carte(get_by_id("1", lista)) == gen_modificat
     assert get_gen_carte(get_by_id("2", lista)) == "fantastica"
