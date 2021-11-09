@@ -79,9 +79,5 @@ def test_afisare_nr_titluri_distincte_dupa_gen():
     assert rezultat["fantastica"]==2
     assert rezultat["wow"]==1
 
-def test_undo_redo():
-    lista=[]
-    lista = adauga_vanzare("1", "Harap Alb", "fantastica", 300.0, "silver", lista)
-    lista = adauga_vanzare("2", "Fat Frumos din lacrima", "fantastica", 150.0, "gold", lista)
-    lista = adauga_vanzare("3", "Povestea micii sirene", "apa", 280.0, "none", lista)
-    #nu stiu cum ar trb sa fac assert aici
+
+

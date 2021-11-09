@@ -1,4 +1,4 @@
-from Domain.vanzare import creeaza_vanzare, get_id
+from Domain.vanzare import creeaza_vanzare, get_id, get_titlu
 
 
 def adauga_vanzare(id, titlu, gen_carte, pret, tip_reducere, lista):
@@ -30,6 +30,17 @@ def get_by_id(id, lista):  # cautam in lista vanzarea care are id-ul introdus
             return vanzare
     return None
 
+def get_by_titlu(titlu,lista):
+    """
+    cauta in lista vanzare cu titlul-introdus
+    :param titlu: titlul dupa care se cauta vanzarea
+    :param lista: lista de vcanzari
+    :return: vanzarea cu titlul-ul introdus, daca exista
+    """
+    for vanzare in lista:
+        if get_titlu(vanzare) == titlu:
+            return vanzare
+    return None
 
 def sterge_vanzare(id, lista):
     """

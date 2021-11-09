@@ -1,4 +1,5 @@
 from Domain.vanzare import get_tip_reducere, creeaza_vanzare, get_id, get_titlu, get_gen_carte, get_pret
+from Logic.CRUD import get_by_titlu
 
 
 def aplicare_reduceri(lista):
@@ -43,20 +44,24 @@ def modificare_gen_dupa_titlu(titlu, gen_modificat, lista):  # trb exceptie daca
     :param lista: lista de carti
     :return: lista cu genurile modificate dupa titlul introdus initial
     """
-    lista_noua = []
-    for vanzare in lista:
-        if get_titlu(vanzare) == titlu:
-            vanzare_noua = creeaza_vanzare(
-                get_id(vanzare),
-                get_titlu(vanzare),
-                gen_modificat,
-                get_pret(vanzare),
-                get_tip_reducere(vanzare)
-            )
-            lista_noua.append(vanzare_noua)
-        else:
-            lista_noua.append(vanzare)
-    return lista_noua
+    if get_by_titlu(titlu,lista) is None:
+        print(ValueError("Titlul nu exista!"))
+        return lista
+    else:
+        lista_noua = []
+        for vanzare in lista:
+            if get_titlu(vanzare) == titlu:
+                vanzare_noua = creeaza_vanzare(
+                    get_id(vanzare),
+                    get_titlu(vanzare),
+                    gen_modificat,
+                    get_pret(vanzare),
+                    get_tip_reducere(vanzare)
+                )
+                lista_noua.append(vanzare_noua)
+            else:
+                lista_noua.append(vanzare)
+        return lista_noua
 
 
 def pret_minim_dupa_gen(lista):  # determina pretul minim pentru fiecare gen
