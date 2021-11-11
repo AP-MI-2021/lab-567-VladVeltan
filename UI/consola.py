@@ -29,7 +29,8 @@ def ui_adaugare_vanzare(lista, undo_list, redo_list):
         tip_reducere = input("Dati tipul de reducere al cartii:")
 
         rezultat = adauga_vanzare(id, titlu, gen_carte, pret, tip_reducere,
-                                  lista)  # punem functia de adaugare in rezultat
+                                  lista)
+        # punem functia de adaugare in rezultat
         # pentru a evita o exceptie in cazul unei adaugari gresite
         undo_list.append(lista)  # pune in undo.list lista de inainte de adaugare
         redo_list.clear()
@@ -189,17 +190,9 @@ def run_meniu_simplu(lista):
             run_meniu_cls(lista)
             break
         elif optiune == "u":
-            if len(undo_list) > 0:
-                redo_list.append(lista)
-                lista = undo_list.pop()  # .pop() ia ultima valoare din lista
-            else:
-                print("Nu se poate face undo!")
+            lista = undo(lista, undo_list, redo_list)
         elif optiune == "r":
-            if len(redo_list) > 0:
-                undo_list.append(lista)
-                lista = redo_list.pop()
-            else:
-                print("Nu se poate face redo!")
+            lista = redo(lista, undo_list, redo_list)
         elif optiune == "a":
             show_all(lista)
 
@@ -207,6 +200,24 @@ def run_meniu_simplu(lista):
             break
         else:
             print("Optiunea introdusa nu exista, reincercati: ")
+
+
+def undo(lista, undo_list, redo_list): #intra mereu pe else
+    if len(undo_list) > 0:
+        redo_list.append(lista)
+        lista = undo_list.pop()  # .pop() ia ultima valoare din lista
+    else:
+        print("Nu se poate face undo!")
+    return lista
+
+
+def redo(lista, undo_list, redo_list):
+    if len(redo_list) > 0:
+        undo_list.append(lista)
+        lista = redo_list.pop()
+    else:
+        print("Nu se poate face redo!")
+    return lista
 
 
 def run_meniu(lista):
