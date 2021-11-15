@@ -210,6 +210,11 @@ def undo(lista, undo_list, redo_list): #intra mereu pe else
         print("Nu se poate face undo!")
     return lista
 
+def undoo(lista, undo_list, redo_list): #intra mereu pe else
+    if len(undo_list) > 0:
+        redo_list.append(lista)
+        lista = undo_list.pop()  # .pop() ia ultima valoare din lista
+    return lista
 
 def redo(lista, undo_list, redo_list):
     if len(redo_list) > 0:
@@ -218,7 +223,11 @@ def redo(lista, undo_list, redo_list):
     else:
         print("Nu se poate face redo!")
     return lista
-
+def redoo(lista, undo_list, redo_list):
+    if len(redo_list) > 0:
+        undo_list.append(lista)
+        lista = redo_list.pop()
+    return lista
 
 def run_meniu(lista):
     while True:

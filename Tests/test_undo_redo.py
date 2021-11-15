@@ -1,5 +1,5 @@
 from Logic.CRUD import adauga_vanzare, get_by_id
-from UI.consola import undo, redo
+from UI.consola import redoo, undoo
 
 
 def test_undo_si_redo():
@@ -26,21 +26,21 @@ def test_undo_si_redo():
 
     # 5 dam undo si dispare ultima adaugare
 
-    lista = undo(lista, undo_list, redo_list)
+    lista = undoo(lista, undo_list, redo_list)
     assert len(lista) == 2
     assert get_by_id('1', lista) is not None
     assert get_by_id('2', lista) is not None
     assert get_by_id('3', lista) is None
 
     # 6 undo raman doar un element
-    lista = undo(lista, undo_list, redo_list)
+    lista = undoo(lista, undo_list, redo_list)
     assert len(lista) == 1
     assert get_by_id('1', lista) is not None
     assert get_by_id('2', lista) is None
     assert get_by_id('3', lista) is None
 
     # 7 undo nu ramane nimic
-    lista = undo(lista, undo_list, redo_list)
+    lista = undoo(lista, undo_list, redo_list)
     assert len(lista) == 0
     assert get_by_id('1', lista) is None
     assert get_by_id('2', lista) is None
@@ -67,15 +67,15 @@ def test_undo_si_redo():
     lista = adauga_vanzare("3", "Povestea micii sirene", "apa", 280.0, "none", lista)
 
     # 10 redo nu face nimic
-    lista = redo(lista, undo_list, redo_list)
+    lista = redoo(lista, undo_list, redo_list)
     assert len(lista) == 3
     assert get_by_id('1', lista) is not None
     assert get_by_id('2', lista) is not None
     assert get_by_id('3', lista) is not None
 
     # 11 doua undo-uri , dispar ultimele doua vanzari
-    lista = undo(lista, undo_list, redo_list)
-    lista = undo(lista, undo_list, redo_list)
+    lista = undoo(lista, undo_list, redo_list)
+    lista = undoo(lista, undo_list, redo_list)
 
     assert len(lista) == 1
     assert get_by_id('1', lista) is not None
@@ -84,7 +84,7 @@ def test_undo_si_redo():
 
     # 12 redo anuleaza ultimul undo, daca ultima operatie e undo
 
-    lista = redo(lista, undo_list, redo_list)
+    lista = redoo(lista, undo_list, redo_list)
     assert len(lista) == 2
     assert get_by_id('1', lista) is not None
     assert get_by_id('2', lista) is not None
@@ -92,7 +92,7 @@ def test_undo_si_redo():
 
     # 13 redo anuleaza si primul undo
 
-    lista = redo(lista, undo_list, redo_list)
+    lista = redoo(lista, undo_list, redo_list)
     assert len(lista) == 3
     assert get_by_id('1', lista) is not None
     assert get_by_id('2', lista) is not None
@@ -100,8 +100,8 @@ def test_undo_si_redo():
 
     # 14 doua undo-uri scot ultimele 2 obiecte
 
-    lista = undo(lista, undo_list, redo_list)
-    lista = undo(lista, undo_list, redo_list)
+    lista = undoo(lista, undo_list, redo_list)
+    lista = undoo(lista, undo_list, redo_list)
 
     assert len(lista) == 1
     assert get_by_id('1', lista) is not None
@@ -120,7 +120,7 @@ def test_undo_si_redo():
     assert get_by_id('4', lista) is not None
 
     # 16 redo nu face nimic, deoarece ultima operatie nu este un undo
-    lista = redo(lista, undo_list, redo_list)
+    lista = redoo(lista, undo_list, redo_list)
     assert len(lista) == 2
     assert get_by_id('1', lista) is not None
     assert get_by_id('2', lista) is None
@@ -128,7 +128,7 @@ def test_undo_si_redo():
     assert get_by_id('4', lista) is not None
 
     # 17 undo anuleaza adaugarea lui o4
-    lista = undo(lista, undo_list, redo_list)
+    lista = undoo(lista, undo_list, redo_list)
     assert len(lista) == 1
     assert get_by_id('1', lista) is not None
     assert get_by_id('2', lista) is None
@@ -136,7 +136,7 @@ def test_undo_si_redo():
     assert get_by_id('4', lista) is None
 
     # 18 undo anuleaza adaugarea lui o1 - practic se continua sirul de undo de la pct 14
-    lista = undo(lista, undo_list, redo_list)
+    lista = undoo(lista, undo_list, redo_list)
     assert len(lista) == 0
     assert get_by_id('1', lista) is None
     assert get_by_id('2', lista) is None
@@ -144,8 +144,8 @@ def test_undo_si_redo():
     assert get_by_id('4', lista) is None
 
     # 19 se anuleaza ultimele 2 undo-uri
-    lista = redo(lista, undo_list, redo_list)
-    lista = redo(lista, undo_list, redo_list)
+    lista = redoo(lista, undo_list, redo_list)
+    lista = redoo(lista, undo_list, redo_list)
     assert len(lista) == 2
     assert get_by_id('1', lista) is not None
     assert get_by_id('2', lista) is None
@@ -153,7 +153,7 @@ def test_undo_si_redo():
     assert get_by_id('4', lista) is not None
 
     # 20 redo nu face nimic
-    lista = redo(lista, undo_list, redo_list)
+    lista = redoo(lista, undo_list, redo_list)
     assert len(lista) == 2
     assert get_by_id('1', lista) is not None
     assert get_by_id('2', lista) is None
